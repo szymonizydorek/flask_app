@@ -1,24 +1,36 @@
 #!/opt/flask/bin/python
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 
+username = None
 
 app = Flask(__name__)
 @app.route('/')
 def index():
     return render_template('index.html')
 
+#The route() decorator in Flask is used to bind URL to a function.
 @app.route('/login', methods=['POST'])
 def index_login():
+    global username  
     username = request.form['username']
     password = request.form['password']
     
     if username == 'admin' and password == 'password':
-        return f'Welcome, {username}!'
+        return redirect(url_for('hello_admin'))
     else:
-        return f'{username} and your password are incorrect', 401
+        return redirect(url_for('hello_user'))
+    
+@app.route('/admin')
+def hello_admin():
+   return render_template('hello_admin.html', username=username)
  
-    return f'Username: {username}, password:{password}'
-
+@app.route('/user')
+def hello_user():
+   return f'Hello user {username}'
+ 
+@app.route('hello/<init:score>')
+def hello_name(score):
+    return render_template('score.html', marks =)
 
 if __name__ == '__main__':
     app.debug = True
