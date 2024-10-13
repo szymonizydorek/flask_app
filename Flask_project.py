@@ -1,5 +1,8 @@
 #!/opt/flask/bin/python
 from flask import Flask, render_template, request, redirect, url_for
+from ldap3 import Server, Connection, ALL
+
+import requests, psutil
 
 username = None
 
@@ -27,10 +30,23 @@ def hello_admin():
 @app.route('/user')
 def hello_user():
    return f'Hello user {username}'
+
+@app.route('/score')
+def score_page():
+    
+    
+   dict = {'phy':50,'che':60,'maths':70}
+   server_details = {'method':request.method,
+                     'remote_addr':request.remote_addr,
+                     'user_agent':request.user_agent.string,
+                     'cpu_load': psutil.cpu_percent(interval=1),
+                     'memory_info': psutil.virtual_memory() 
+                     }    
+   return render_template('admin_pages/1_score.html',result=dict, username=username, server=server_details)
  
-@app.route('hello/<init:score>')
-def hello_name(score):
-    return render_template('score.html', marks =)
+@app.route('/tester')
+def website_tester():
+    pass
 
 if __name__ == '__main__':
     app.debug = True

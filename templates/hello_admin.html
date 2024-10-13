@@ -1,8 +1,29 @@
-<!doctype html>
-<html>
-   <body>
-   
-      <h1>Hello this is me! {{ username }}!</h1> 
-      
-   </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Welcome to {{ username }}'s page</h1>
+        </header>
+
+        <main class="main-content">
+            <h3>These are allowed actions:</h3>
+            <ol>
+                <li><a href="https://www.wp.pl/">Company's Website</a></li>
+                <li><a href="{{ url_for('score_page') }}">Check Score</a></li>
+                <li><a href="{{ url_for('website_tester') }}">Website Tester</a></li>
+            </ol>
+        </main>
+
+        <footer class="footer">
+            <p>Developed by DevOps Department. Help: <a href="https://www.wp.pl/" target="_blank">www.wp.pl</a></p>
+        </footer>
+    </div>
+</body>
 </html>
