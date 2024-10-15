@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Score Page</title>
+    <title>Monitoring System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container">
         <div class="user-scores">
-            <h1>Welcome {{ username }}. These are your results:</h1>
+            <h1>Welcome {{ username }}. This is monitoring system:</h1>
             <div class="score">
                 <h3>Your PHY score is: {{ result['phy'] }}</h3>
             </div>
@@ -60,13 +60,21 @@
                         <td>Memory info</td>
                         <td>{{ server['memory_info'] }}%</td>
                     </tr>
+                    <tr>
+                        <td>6.</td>
+                        <td>Boot Time:</td>
+                        <td>{{ server['boot_time'] }}%</td>
+                    </tr>
+                    <tr>
+                        <td>7.</td>
+                        <td>Disk IO counters:</td>
+                        <td>{{ server['disk_io'] }}%</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <footer>
-        <p>Developed by DevOps Department. Help: <a href="https://www.wp.pl/" target="_blank">www.wp.pl</a></p>
-    </footer>
+    
 </body>
 </html>
