@@ -7,12 +7,6 @@ import psutil, datetime
 
 username = None
 
-class Calculator:
-    def add(self, a, b):
-        return a + b
-    
-    def multiply(self, a, b):
-        return a * b 
 
 app = Flask(__name__)
 system_monitor = SystemMonitorClass()
@@ -21,10 +15,7 @@ http_data = HttpRequestsClass()
 
 @app.route('/')
 def index():
-    calc = Calculator()
-    sum_result = calc.add(5,3)
-    mul_result = calc.multiply(5,5)
-    return render_template('index.html', sum=sum_result,mul=mul_result)
+    return render_template('index.html')
 
 #The route() decorator in Flask is used to bind URL to a function.
 @app.route('/login', methods=['POST'])
@@ -64,18 +55,22 @@ def http_data_page():
                     }  
    dict = {'phy':50,'che':60,'maths':70}
    return render_template('admin_pages/2_http.html',result=dict, username=username, http=http_details)
- 
+
+
+
+
+@app.route('/url_form')
+def input_form():
+    return render_template('admin_pages/url_input_form.html')
+
+@app.route('/result', methods=['POST'])
+def result_page():
+    # Get the data from the form
+    data = request.form.get('data')  # Using .get() for safe access
+    return render_template('admin_pages/url_result.html', data=data)
+
  
   
-@app.route('/url_form')
-def get_url_page():
-   # url = request.form['url']
-    dict = {'phy':50,'che':60,'maths':70}
-    return render_template('admin_pages/2_link_form.html',result=dict,username=username)
-
-
-
-
 
 
  
@@ -83,6 +78,10 @@ def get_url_page():
 @app.route('/tester')
 def website_tester():
     pass
+
+@app.route('/user_info')
+def user_info():
+    return render_template('admin_pages/4_User_Info_Dashboard.html')
 
 @app.route('/api/userinfo', methods=['GET'])
 def api_user_info():

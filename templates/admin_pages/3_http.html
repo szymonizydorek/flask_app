@@ -20,34 +20,6 @@
                 <h3>Your MATHS score is: {{ result['maths'] }}</h3>
             </div>
         </div>
-
-        <div class="server-responses">
-            <h1>These are server's responses:</h1>
-            <div class="request-method">
-                <p>Request Method: {{ server }}</p>
-            </div>
-            <table class="simple-table">
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Server Query</th>
-                        <th>Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1.</td>
-                        <td>Request Method:</td>
-                        <td>{{ http['status_code']  }}</td>
-                    </tr>
-                    <tr>
-                        <td>2.</td>
-                        <td>Response Time:</td>
-                        <td>{{ http['total_seconds'] }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
 
     
