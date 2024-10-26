@@ -40,12 +40,34 @@ def hello_user():
 @app.route('/system_monitoring')
 def system_monitoring_page(): 
    dict = {'phy':50,'che':60,'maths':70}
-   server_details = { 'cpu_load' : system_monitor.get_memory_info(),
-                      'memory_info' : system_monitor.get_cpu_load(),
-                      'boot_time' : system_monitor.get_boot_time(),
-                      'disk_io' : system_monitor.get_disk_io_counters()
+   
+ 
+   server_details = { 'cpu_usage' : system_monitor.get_cpu_load(),
+                      'cpu_count' : system_monitor.get_cpu_count(),
+                      'cpu_times' : system_monitor.get_cpu_times()
                      }    
-   return render_template('admin_pages/1_SystemMonitoring.html',result=dict, username=username, server=server_details)
+ 
+   
+   request_details = { 'library_used' : 'Flask Request', 
+                      'method' : request.method,
+                      'url': request.url,
+                      'cookies': request.cookies,
+                      'headers' : request.headers,
+                      'user_agent' : request.headers.get("User-Agent"),
+                      'authorization' : request.headers.get("Authorization"),
+                      'accepted_language' : request.headers.get('Accept-Language:')
+                      }
+   print ("_____________DEBUG_____________")
+   cpu_count_from_dict = server_details['cpu_count']
+   print(cpu_count_from_dict)
+   
+   for header, value in request.headers.items():
+       print(f"{header}:{value}")
+   print ("_____________DEBUG_____________")
+    
+    
+       
+   return render_template('admin_pages/1_SystemMonitoring.html',result=dict, username=username, server=server_details, http=request_details)
  
 @app.route('/http_data')
 def http_data_page(): 
